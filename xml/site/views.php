@@ -8,8 +8,8 @@
  */
 
 defined('_JEXEC') or die;
-
-class @prefix@siteView@name@ extends @prefix@View
+require_once dirname(__FILE__).'/view.php';
+class @prefix@siteView@name@ extends @prefix@siteBaseView@name@
 {
 	
 }

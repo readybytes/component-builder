@@ -8,8 +8,12 @@
  */
 
 defined('_JEXEC') or die;
-
-class @prefix@adminView@name@ extends @prefix@View
+require_once dirname(__FILE__).'/view.php';
+class @prefix@adminView@name@ extends @prefix@adminBaseView@name@
 {
-	
+	// delete this function
+	public function display()
+	{
+		return true;
+	}
 }

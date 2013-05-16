@@ -5,7 +5,7 @@ class JCB{
 	public $base 	= __FILE__;
 	public $package = '';
 	public $src 	= '';
-	public $files = '';
+	public $files 	= '';
 	public function __construct()
 	{
 		$this->base = dirname($this->base);
@@ -74,7 +74,9 @@ class JCB{
 		}
 		
 		$src_path = $this->src.'/'.$for.'/'.$type.'.php';
+		$base_view = $this->src.'/'.$for.'/view.php';
 		$core_contents = file_get_contents($src_path);
+		$base_contents = file_get_contents($base_view);
 		
 		foreach($entities as $entity){
 			$content = str_replace('@name@', ucfirst($entity), $core_contents);
@@ -83,6 +85,11 @@ class JCB{
 			mkdir($dest_path.'/'.$entity, 0777);
 			file_put_contents($dest_path.'/'.$entity.'/index.html', '<html></html>');
 			file_put_contents($dest_path.'/'.$entity.'/view.html.php', $content);
+			
+			$content = str_replace('@name@', ucfirst($entity), $base_contents);
+			$content = str_replace('@prefix@', ucfirst($this->prefix), $content);
+			$content = $this->_replace_header_token($content);
+			file_put_contents($dest_path.'/'.$entity.'/view.php', $content);			
 		}
 	}	
 	
@@ -118,11 +125,13 @@ class JCB{
 		$entities['/site/defines.php'] = '/site/'.$this->name.'/defines.php';
 		$entities['/site/includes.php'] = '/site/'.$this->name.'/includes.php';
 		$entities['/site/loader.php'] = '/site/'.$this->name.'/loader.php';
+		$entities['/site/entry.php'] = '/site/'.$this->name.'.php';
+		$entities['/admin/entry.php'] = '/admin/'.$this->name.'.php';
 		
 		foreach($entities as $src => $dest){
 			$src_path = $this->src.$src;
 			$content = file_get_contents($src_path);		
-			$content = str_replace('@name@', ucfirst($entity), $content);
+			$content = str_replace('@name@', $this->name, $content);
 			$content = str_replace('@prefix@', ucfirst($this->prefix), $content);
 			$content = str_replace('@extendprefix@', ucfirst($this->extendprefix), $content);
 			$content = str_replace('@prefix_constant@', strtoupper($this->prefix_constant), $content);
@@ -217,7 +226,7 @@ class JCB{
 		$content = str_replace('@creationDate@',ucfirst($this->creationDate), $content);
 		$content = str_replace('@authorEmail@', ucfirst($this->authorEmail), $content);
 		$content = str_replace('@authorUrl@', 	ucfirst($this->authorUrl), $content);
-		$content = str_replace('@author@', 	ucfirst($this->author), $content);
+		$content = str_replace('@author@', 		ucfirst($this->author), $content);
 		$content = str_replace('@description@',	ucfirst($this->description), $content);
 		return $content;
 	}	
