@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 if(RB_REQUEST_DOCUMENT_FORMAT === 'ajax'){
-	class OSInvoiceViewbase extends @extendprefix@ViewAjax{}
+	class @prefix@Viewbase extends @extendprefix@ViewAjax{}
 }elseif(RB_REQUEST_DOCUMENT_FORMAT === 'json'){
 	class @prefix@Viewbase extends @extendprefix@ViewJson{}
 }else{

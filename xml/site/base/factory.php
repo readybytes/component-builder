@@ -9,9 +9,7 @@
 
 defined('_JEXEC') or die;
 
-jimport('joomla.filesystem.folder');
-jimport('joomla.filesystem.file');
-
-class @prefix@HelperLoader extends @extendprefix@HelperLoader
+class @prefix@Factory extends @extendprefix@Factory
 {
+	
 }

@@ -25,14 +25,14 @@ define('@prefix_constant@_CORE_LOADED', true);
 include_once dirname(__FILE__).'/defines.php';
 
 //load core
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/base',		'',	'@prefix@');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/base',		'',	'@prefix@');
 
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/models',		'Model',	'@prefix@');
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/models',		'Modelform','@prefix@');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/models',		'Model',	'@prefix@');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/models',		'Modelform','@prefix@');
 
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/tables',		'Table',	'@prefix@');
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/libs',			'',			'@prefix@');
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/helpers',		'Helper',	'@prefix@');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/tables',		'Table',	'@prefix@');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/libs',			'',			'@prefix@');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/helpers',		'Helper',	'@prefix@');
 
 //html
 //@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_CORE.'/html/html',		'Html',			'@prefix@');
@@ -40,12 +40,12 @@ include_once dirname(__FILE__).'/defines.php';
 
 
 // site
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_SITE.'/controllers',	'Controller',		'@prefix@Site');
-@prefix@HelperLoader::addAutoLoadViews(@prefix_constant@_PATH_SITE.'/views', RB_REQUEST_DOCUMENT_FORMAT,  '@prefix@Site');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_SITE.'/controllers',	'Controller',		'@prefix@Site');
+@extendprefix@HelperLoader::addAutoLoadViews(@prefix_constant@_PATH_SITE.'/views', @extendprefix_constant@_REQUEST_DOCUMENT_FORMAT,  '@prefix@Site');
 
 // admin
-@prefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_ADMIN.'/controllers',	'Controller',		'@prefix@Admin');
-@prefix@HelperLoader::addAutoLoadViews(@prefix_constant@_PATH_ADMIN.'/views', @extendprefix@REQUEST_DOCUMENT_FORMAT, '@prefix@Admin');
+@extendprefix@HelperLoader::addAutoLoadFolder(@prefix_constant@_PATH_ADMIN.'/controllers',	'Controller',		'@prefix@Admin');
+@extendprefix@HelperLoader::addAutoLoadViews(@prefix_constant@_PATH_ADMIN.'/views', @extendprefix_constant@_REQUEST_DOCUMENT_FORMAT, '@prefix@Admin');
 
 $filename = 'com_@prefix@_extensions';
 $language = JFactory::getLanguage();

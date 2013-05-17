@@ -34,7 +34,7 @@ define('@prefix_constant@_PATH_SITE_VIEW',			@prefix_constant@_PATH_SITE.'/views
 define('@prefix_constant@_PATH_SITE_TEMPLATE',		@prefix_constant@_PATH_SITE.'/templates');
 
 // backend
-define('@prefix_constant@_PATH_ADMIN', 				JPATH_ADMINISTRATOR.'/components/com_@prefix@');
+define('@prefix_constant@_PATH_ADMIN', 				JPATH_ADMINISTRATOR.'/components/com_@name@');
 define('@prefix_constant@_PATH_ADMIN_CONTROLLER',	@prefix_constant@_PATH_ADMIN.'/controllers');
 define('@prefix_constant@_PATH_ADMIN_VIEW',			@prefix_constant@_PATH_ADMIN.'/views');
 define('@prefix_constant@_PATH_ADMIN_TEMPLATE',		@prefix_constant@_PATH_ADMIN.'/templates');
