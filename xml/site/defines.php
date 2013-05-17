@@ -10,12 +10,12 @@
 if(defined('_JEXEC')===false) die();
 
 // If file is already included
-if(defined('JXIFORMS_SITE_DEFINED')){
+if(defined('@prefix_constant@_DEFINED')){
 	return;
 }
 
 //mark core loaded
-define('@prefix_constant@_SITE_DEFINED', true);
+define('@prefix_constant@_DEFINED', true);
 define('@prefix_constant@_COMPONENT_NAME','@prefix@');
 
 
@@ -45,4 +45,4 @@ define('@prefix_constant@_PATH_ADMIN_TEMPLATE',		@prefix_constant@_PATH_ADMIN.'/
 
 
 // object to identify extension, create once, so same can be consumed by constructors
-@extendprefix_constant@Extension::getInstance(@prefix_constant@_COMPONENT_NAME, array('prefix_css'=>'@name@'));
+@extendprefix@Extension::getInstance(@prefix_constant@_COMPONENT_NAME, array('prefix_css'=>'@name@'));
