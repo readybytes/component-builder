@@ -16,7 +16,7 @@
 </files>
 
 <!-- Media files -->
-<media destination="com_xiec" folder="media">
+<media destination="com_@name@" folder="media">
 @mediaFolders@
 </media>
 	

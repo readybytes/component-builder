@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-class @prefix@adminController@name@ extends @prefix@Controller
+class @prefix@siteController@name@ extends @prefix@Controller
 {
 	
 }
