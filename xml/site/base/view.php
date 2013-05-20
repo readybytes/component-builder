@@ -18,7 +18,7 @@ if(RB_REQUEST_DOCUMENT_FORMAT === 'ajax'){
 }
 
 
-class @prefix@View extends @extendprefix@Viewbase
+class @prefix@View extends @prefix@Viewbase
 {
 	
 }
