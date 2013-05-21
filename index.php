@@ -155,12 +155,13 @@ class JCB{
 			mkdir($dest_path, 0777);
 			file_put_contents($dest_path.'/index.html', '<html></html>');
 		}	
-		$entities = array('controller', 'model', 'table', 'helper', 'lib', 'view');
+		$entities = array('controller', 'model', 'table', 'helper', 'lib', 'view', 'factory');
 		foreach($entities as $entity){
 			$src_path = $this->src.'/site/base/'.$entity.'.php';
 			$content = file_get_contents($src_path);		
 			$content = str_replace('@name@', ucfirst($entity), $content);
 			$content = str_replace('@prefix@', ucfirst($this->prefix), $content);
+			$content = str_replace('@prefix_constant@', strtoupper($this->prefix_constant), $content);
 			$content = str_replace('@extendprefix@', ucfirst($this->extendprefix), $content);
 			$content = $this->_replace_header_token($content);			
 			file_put_contents($dest_path.'/'.$entity.'.php', $content);
