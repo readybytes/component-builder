@@ -20,5 +20,5 @@ if(RB_REQUEST_DOCUMENT_FORMAT === 'ajax'){
 
 class @prefix@View extends @prefix@Viewbase
 {
-	
+	public $_component = @prefix_constant@_COMPONENT_NAME;
 }
