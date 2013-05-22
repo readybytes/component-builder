@@ -1,0 +1,17 @@
+dir.root			=${project.basedir}
+dir.package			=${dir.root}/packages
+dir.component		=${dir.root}/component
+
+com.name 					= builder
+com.prefix 					= Builder
+com.prefix_constant 		= BUILDER
+com.extendprefix 			= Rb_
+com.extendprefix_constant 	= RB
+com.copyright 				= Gaurav Jain
+com.author 					= Gaurav Jain
+com.authorUrl 				= gaurav-jain.in
+com.authorEmail 			= gaurav.jain028@gmail.com
+com.creationDate 			= 21 May 2013
+com.license 				= GNU GPL 3
+com.description 			= Joomla Component Builder
+com.entities				= invoice,transaction

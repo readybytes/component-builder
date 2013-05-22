@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<project name="Package Builder" basedir="." default="build" description="Phing build script for package.">
+
+	<target name="config" description="Load configuration file">		
+		<property file="build.prop" override="true" />
+	</target>
+	
+	<target name="build" depends="config">
+		<!-- create a package folder after deleting it-->
+		<delete dir="${dir.package}" includeemptydirs="true" />
+		<mkdir dir="${dir.package}" />
+		<mkdir dir="${dir.package}/${com.name}" />
+		
+		<foreach list="admin,site,languages,media" param="folder" target="copy" />
+		<copy file="${dir.component}/component.xml" tofile="${dir.package}/${com.name}/${com.name}.xml" overwrite="true"/>
+		<copy file="${dir.component}/script.php" tofile="${dir.package}/${com.name}/script.php" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/admin/component.php" tofile="${dir.package}/${com.name}/admin/${com.name}.php" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/site/component.php" tofile="${dir.package}/${com.name}/site/${com.name}.php" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/languages/admin/en-GB.com_component.ini" tofile="${dir.package}/${com.name}/languages/admin/en-GB.com_${com.name}.ini" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/languages/admin/en-GB.com_component.sys.ini" tofile="${dir.package}/${com.name}/languages/admin/en-GB.com_${com.name}.sys.ini" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/languages/site/en-GB.com_component.ini" tofile="${dir.package}/${com.name}/languages/site/en-GB.com_${com.name}.ini" overwrite="true"/>
+		
+		<phingcall target="replace_tokens" />
+		
+		<phingcall target="create_entities" />	
+		
+		<copy todir="${dir.package}/${com.name}/site/${com.name}" >
+		  <fileset dir="${dir.package}/${com.name}/site/component" />
+		</copy>
+		<delete dir="${dir.package}/${com.name}/site/component" includeemptydirs="true" />
+		
+		<zip destfile="${dir.package}/${com.name}.zip" basedir="${dir.package}/${com.name}"/>			
+	</target>
+	
+	<target name="copy">		
+		<!-- copy admin folder -->		
+		<copy todir="${dir.package}/${com.name}/${folder}" >
+		  <fileset dir="${dir.component}/${folder}" />
+		</copy>				
+	</target>
+	
+	<target name="create_entities">
+		<property name='ext' value="php"  override="true" />
+		<property name='path' value="admin/controllers"  override="true" />		
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/admin/controllers/entity.php"/>
+		
+		<property name='path' value="site/controllers"  override="true" />
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/site/controllers/entity.php"/>
+		
+		<property name='path' value="site/component/helpers"  override="true" />
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/site/component/helpers/entity.php"/>
+		
+		<property name='path' value="site/component/libs"  override="true" />
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/site/component/libs/entity.php"/>
+		
+		<property name='path' value="site/component/models"  override="true" />
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/site/component/models/entity.php"/>
+		
+		<property name='path' value="site/component/tables"  override="true" />
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/site/component/tables/entity.php"/>
+		
+		<property name='path' value="site/component/html/forms"  override="true" />
+		<property name='ext' value="xml"  override="true" />
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete file="${dir.package}/${com.name}/site/component/html/forms/entity.xml"/>
+		
+		<property name='ext' value="false"  override="true" />
+		<property name='path' value="admin/views"  override="true" />		
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete dir="${dir.package}/${com.name}/admin/views/entity" includeemptydirs="true" />
+		
+		<property name='path' value="admin/templates/default"  override="true" />		
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete dir="${dir.package}/${com.name}/admin/templates/default/entity" includeemptydirs="true" />
+		
+		<property name='path' value="site/views"  override="true" />		
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete dir="${dir.package}/${com.name}/site/views/entity" includeemptydirs="true" />
+		
+		<property name='path' value="site/templates/default"  override="true" />		
+		<foreach list="${com.entities}" param="entity" target="create_entity" />
+		<delete dir="${dir.package}/${com.name}/site/templates/default/entity" includeemptydirs="true" />
+	</target>
+	
+	<target name="create_entity">			
+		<if>
+		 <equals arg1="${ext}" arg2="" />
+		 <then>
+		 	<mkdir dir="${dir.package}/${com.name}/${path}/${entity}" />
+		   	<copy todir="${dir.package}/${com.name}/${path}/${entity}" >
+		  		<fileset dir="${dir.package}/${com.name}/${path}/entity" />
+			</copy>
+		 </then>
+		 <else>		 	
+			<copy file="${dir.package}/${com.name}/${path}/entity.${ext}" tofile="${dir.package}/${com.name}/${path}/${entity}.${ext}" overwrite="true"/>
+		 </else>
+		</if>		
+	
+		<php expression="ucfirst('${entity}')" returnProperty="ucfirst_entity"/>
+		<reflexive>
+			<fileset dir="${dir.package}/${com.name}/${path}">
+			     <include name="**/*.*" />
+			</fileset>
+			 <filterchain>
+				<replacetokens>
+				    <token key="entity"	value="${ucfirst_entity}" />
+				</replacetokens>
+			</filterchain>
+		</reflexive>
+	</target>
+	
+	<target name="replace_tokens">
+		<reflexive>
+			<fileset dir="${dir.package}/${com.name}">
+			     <include name="**/*.*" />
+			</fileset>
+			 <filterchain>
+				<replacetokens>
+				    <token key="name" 				value="${com.name}" />
+				    <token key="prefix" 			value="${com.prefix}" />
+				    <token key="prefix_constant" 	value="${com.prefix_constant}" />
+				    <token key="copyright" 			value="${com.copyright}" />
+				    <token key="author" 			value="${com.author}" />
+				    <token key="authorUrl" 			value="${com.authorUrl}" />
+				    <token key="authorEmail" 		value="${com.authorEmail}" />
+				    <token key="reationDate" 		value="${com.creationDate}" />
+				    <token key="license" 			value="${com.license}" />
+				    <token key="description" 		value="${com.description}" />
+				</replacetokens>
+			</filterchain>
+		</reflexive>
+	</target>
+	
+</project>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+<name>@name@</name>
+<creationDate>@creationDate@</creationDate>
+<author>@author@</author>
+<authorEmail>@authorEmail@</authorEmail>
+<authorUrl>@authorUrl@</authorUrl>
+<copyright>@copyright@</copyright>
+<license>@license@</license>
+<version>@build.version@</version>
+<description>@description@</description>
+
+<!-- Public front end files -->
+<files folder="site">
+	<filename>index.html</filename>
+	<filename>@name@.php</filename>
+	<folder>controllers</folder>
+	<folder>views</folder>
+	<folder>templates</folder>
+	<folder>@name@</folder>
+</files>
+
+<!-- Media files -->
+<media destination="com_@name@" folder="media">
+	<folder>css</folder>
+	<folder>js</folder>
+	<folder>images</folder>
+	<filename>index.html</filename>
+</media>
+
+<scriptfile>script.php</scriptfile>
+
+<languages>
+<language tag="en-GB">languages/site/en-GB.com_@name@.ini</language>
+</languages>
+
+<!-- Runs on install -->
+<install>
+<sql>
+	<file driver="mysql" charset="utf8">install/sql/install.mysql.utf8.sql</file>
+</sql>
+</install>
+
+<!-- Administrator back-end section -->
+<administration>
+	<menu view="dashboard">COM_@prefix_constant@</menu>
+<!-- Administration menu -->
+@adminMenu@
+@adminSubmenu@
+
+<!-- Back-end files -->
+<files folder="admin">
+	<filename>index.html</filename>
+	<filename>@name@.php</filename>
+	<folder>controllers</folder>
+	<folder>views</folder>
+	<folder>templates</folder>
+</files>
+
+<languages>
+<language tag="en-GB">languages/admin/en-GB.com_@name@.ini</language>
+<language tag="en-GB">languages/admin/en-GB.com_@name@.sys.ini</language>
+</languages>
+</administration>
+</extension>

@@ -1,0 +1,15 @@
+/**
+* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @license		GNU/GPL, see LICENSE.php
+* @package		@prefix_constant@
+* @subpackage	CSS
+* @contact 		team@readybytes.in
+*/
+
+.@name@-wrap .spinner{
+	background: url("../images/spinner.gif") no-repeat;
+	height : 48px;
+	display:block;
+	background-position: center center;	
+}
+	
