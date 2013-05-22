@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+<name>@name@</name>
+<creationDate>@creationDate@</creationDate>
+<author>@author@</author>
+<authorEmail>@authorEmail@</authorEmail>
+<authorUrl>@authorUrl@</authorUrl>
+<copyright>@copyright@</copyright>
+<license>@license@</license>
+<version>@build.version@</version>
+<description>@description@</description>
+
+<!-- Public front end files -->
+<files folder="site">
+@siteFolders@
+</files>
+
+<!-- Media files -->
+<media destination="com_@name@" folder="media">
+@mediaFolders@
+</media>
+	
+<languages>
+	<language tag="en-GB">languages/site/en-GB.com_@name@.ini</language>
+</languages>
+
+<!-- Runs on install -->
+<install>
+<sql>
+@installSQL@
+</sql>
+</install>
+
+<!-- Administrator back-end section -->
+<administration>
+<!-- Administration menu -->
+@adminMenu@
+@adminSubmenu@
+
+<!-- Back-end files -->
+<files folder="admin">
+@adminFolders@
+</files>
+
+<languages>
+	<language tag="en-GB">languages/admin/en-GB.com_@name@.ini</language>
+	<language tag="en-GB">languages/admin/en-GB.com_@name@.sys.ini</language>
+</languages>
+</administration>
+</extension>
