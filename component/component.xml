@@ -54,6 +54,7 @@
 	<filename>@name@.php</filename>
 	<folder>controllers</folder>
 	<folder>views</folder>
+	<folder>install</folder>
 	<folder>templates</folder>
 </files>
 
