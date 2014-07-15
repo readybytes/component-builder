@@ -13,6 +13,8 @@
 		
 		<foreach list="admin,site,languages,media" param="folder" target="copy" />
 		<copy file="${dir.component}/component.xml" tofile="${dir.package}/${com.name}/${com.name}.xml" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/media/js/component.js" tofile="${dir.package}/${com.name}/media/js/${com.name}.js" overwrite="true"/>
+		<move file="${dir.package}/${com.name}/media/css/component.css" tofile="${dir.package}/${com.name}/media/css/${com.name}.css" overwrite="true"/>
 		<copy file="${dir.component}/script.php" tofile="${dir.package}/${com.name}/script.php" overwrite="true"/>
 		<move file="${dir.package}/${com.name}/admin/component.php" tofile="${dir.package}/${com.name}/admin/${com.name}.php" overwrite="true"/>
 		<move file="${dir.package}/${com.name}/site/component.php" tofile="${dir.package}/${com.name}/site/${com.name}.php" overwrite="true"/>
@@ -32,8 +34,7 @@
 		<zip destfile="${dir.package}/${com.name}.zip" basedir="${dir.package}/${com.name}"/>			
 	</target>
 	
-	<target name="copy">		
-		<!-- copy admin folder -->		
+	<target name="copy">			
 		<copy todir="${dir.package}/${com.name}/${folder}" >
 		  <fileset dir="${dir.component}/${folder}" />
 		</copy>				
