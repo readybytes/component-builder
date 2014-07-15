@@ -106,6 +106,8 @@
 		<reflexive>
 			<fileset dir="${dir.package}/${com.name}/${path}">
 			     <include name="**/*.*" />
+			     <exclude name="**/entity.${ext}" />
+			     <exclude name="entity/*.*" />
 			</fileset>
 			 <filterchain>
 				<replacetokens>

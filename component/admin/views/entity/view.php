@@ -14,10 +14,10 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Base View
+ * @entity@ Base View
 * @author @author@
  */
-class @prefix@AdminBaseViewInvoice extends @prefix@View
+class @prefix@AdminBaseView@entity@ extends @prefix@View
 {	
 	/**
 	 * @var @prefix@HelperInvoice

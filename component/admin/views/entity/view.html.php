@@ -14,11 +14,11 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Html View
+ * @entity@ Html View
 * @author @author@
  */
 require_once dirname(__FILE__).'/view.php';
-class @prefix@AdminViewInvoice extends @prefix@AdminBaseViewInvoice
+class @prefix@AdminView@entity@ extends @prefix@AdminBaseView@entity@
 {	
 	
 }
